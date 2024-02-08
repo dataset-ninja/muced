@@ -1,5 +1,15 @@
+The authors contribute a novel **MuCeD: Multi-Class Celiac Disease Dataset** for the detection of celiac disease. It consists of 55 annotated biopsy images of
+the human duodenum, which have a total of 8,600 cell annotations of **epithelial nuclei** and **intraepithelial lymphocyte**. The dataset was carefully curated and validated by expert pathologists.
 
-Sample image template:
-<img src="https://github.com/dataset-ninja/gland-segmentation/assets/78355358/f158d0dd-71d5-41a2-aba5-4a5f57d54c35" alt="image" width="800">
+## Motivation
 
-<span style="font-size: smaller; font-style: italic;">Image description.</span>
+Automated multi-class cell detection and counting plays a crucial role in various pathological diagnoses, eliminating the tedious manual counting process and reducing inter-observer variations among pathologists. However, applying general-purpose deep learning-based object detection and counting methods to medical image analysis poses challenges due to limited data, presence of tiny overlapping objects, multiple cell types, severe class imbalance, and subtle differences in cell size/shape.
+
+The task of multi-class multi-cell detection and counting (MC2DC) involves identifying and localizing bounding boxes for different cell types, followed by quantifying each cell class. This approach significantly aids in diagnosing various clinical conditions. For example, in a CBC blood test, counting red blood cells, white blood cells, and platelets helps diagnose conditions like anemia, blood cancer, and infections. Similarly, analyzing malignant tumor images using MC2DC assists in assessing the efficacy of cancer treatments. Additionally, performing MC2DC on duodenum biopsies enables computation of cell type ratios crucial for diagnosing conditions like celiac disease.
+
+Manual cell counting is prone to substantial inter-observer and intra-observer variations, underscoring the necessity for robust and reproducible predictions provided by AI systems. Given the complexity of the task, MC2DC models may benefit from insights from trained pathologists, incorporating discriminative attributes to enhance accuracy and reliability.
+
+## Dataset description
+
+The MuCeD dataset was carefully curated and validated by expert pathologists. The H&E-stained histopathology images of the human duodenum in MuCeD are captured through an Olympus BX50 microscope at 20× zoom using a DP26 camera with each image being 1920×2148 in dimension. The dataset has 55 images, with bounding boxes for 2,090 **intraepithelial lymphocyte** (IELs) and 6,518 **epithelial nuclei** (ENs) annotated using the [LabelMe](http://labelme.csail.mit.edu/) software and are further validated by multiple pathologists. These cells are selected from the epithelial area – a region of interest that has been explicitly segmented by experts. The epithelial area denotes the area of continuous villi and is used for cell detection, whereas the rest of the area is masked out. Further, each image is sliced into 9 subimages and each subimage is re-scaled to 640x640, before it is given as input to object detection models. The authors divide 55 images into five folds of 11 images each and report 5-fold cross-validation numbers. Within 44 training images in a given fold, 8 are used for validation and 36 for training.
+
